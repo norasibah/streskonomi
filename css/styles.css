@@ -528,16 +528,17 @@ button:disabled {
 /* Responsive */
 @media (max-width: 640px) {
     .page-shell {
-        padding: 1.5rem 1rem 4rem;
+        padding: 1rem 0.75rem 3rem;
     }
 
     .likert-group {
-        gap: 0.5rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.25rem;
     }
 
     .likert-group label {
-        padding: 0.75rem 0.25rem;
-        font-size: 0.9rem;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.15rem;
     }
 
     .form-actions {
@@ -548,11 +549,17 @@ button:disabled {
         width: 100%;
     }
 
-    .hero-card {
-        padding: 1.5rem;
+    .hero-card,
+    .factor-card,
+    #results {
+        padding: 1.25rem;
     }
 
-    .factor-card {
-        padding: 1.5rem;
+    .results-summary h3 {
+        font-size: 1.5rem;
+    }
+
+    .results-summary .score-badge {
+        font-size: 3.5rem;
     }
 }
