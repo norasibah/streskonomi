@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // alert("Script loaded - if you see this, JavaScript is working");
   const form = document.getElementById("streskonomi-form");
   const calculateButton = document.getElementById("calculate-button");
   const resetButton = document.getElementById("reset-button");
+  const nextButton = document.getElementById("next-button");
+  const prevButton = document.getElementById("prev-button");
+  const progressFill = document.getElementById("progress-fill");
+  const progressLabel = document.getElementById("progress-label");
+  const introCard = document.getElementById("intro-card");
 
   const resultsSection = document.getElementById("results");
   const overallScoreEl = document.getElementById("overall-score");
@@ -14,6 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("alert-modal");
   const modalMessage = document.getElementById("modal-message");
   const modalCloseButton = document.getElementById("modal-close");
+
+  // Factor card navigation
+  const factorCardsEl = Array.from(
+    document.querySelectorAll(".factor-card[data-factor]")
+  );
+  const factorKeys = [
+    "kewangan",
+    "pendapatan",
+    "simpanan",
+    "hutang",
+    "tekanan_sosial",
+    "reaksi_emosi",
+  ];
+  let currentStep = 0;
+  const totalSteps = factorKeys.length;
 
   const factorCards = Array.from(
     document.querySelectorAll(".result-card[data-result]")
@@ -301,10 +320,82 @@ document.addEventListener("DOMContentLoaded", () => {
     card.recos.innerHTML = recos.map((item) => `<li>${item}</li>`).join("");
   }
 
+  // Step navigation functions
+  function showStep(stepIndex) {
+    factorCardsEl.forEach((card, index) => {
+      if (index === stepIndex) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+
+    // Update progress
+    const progress = ((stepIndex + 1) / totalSteps) * 100;
+    progressFill.style.width = `${progress}%`;
+    progressLabel.textContent = `Bahagian ${
+      stepIndex + 1
+    } daripada ${totalSteps}`;
+
+    // Update button visibility
+    prevButton.style.display = stepIndex === 0 ? "none" : "block";
+
+    if (stepIndex === totalSteps - 1) {
+      nextButton.style.display = "none";
+      calculateButton.style.display = "block";
+    } else {
+      nextButton.style.display = "block";
+      calculateButton.style.display = "none";
+    }
+  }
+
+  function validateCurrentStep() {
+    const currentFactor = factorKeys[currentStep];
+    const factorMeta = FACTORS[currentFactor];
+
+    for (const questionName of factorMeta.questions) {
+      const selected = form.querySelector(
+        `input[name="${questionName}"]:checked`
+      );
+      if (!selected) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Next button handler
+  nextButton.addEventListener("click", () => {
+    if (!validateCurrentStep()) {
+      showModal(
+        `Sila jawab semua soalan bagi bahagian ini sebelum meneruskan.`
+      );
+      return;
+    }
+
+    if (currentStep < totalSteps - 1) {
+      currentStep++;
+      showStep(currentStep);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  // Previous button handler
+  prevButton.addEventListener("click", () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
   calculateButton.addEventListener("click", () => {
-    // alert(
-    //   "Button clicked! If you see this but no results, check if you filled all questions."
-    // );
+    if (!validateCurrentStep()) {
+      showModal(
+        `Sila jawab semua soalan bagi bahagian ini sebelum meneruskan.`
+      );
+      return;
+    }
     try {
       const responses = collectResponses();
       const factorMeans = {};
@@ -327,8 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
         OVERALL_RECOMMENDATIONS[overallLevel] ||
         "Tiada cadangan keseluruhan ditemui.";
 
+      // Hide form and show results
+      form.style.display = "none";
+      introCard.style.display = "none";
       resultsSection.classList.remove("hidden");
-      resultsSection.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       showModal(error.message);
     }
@@ -337,6 +431,11 @@ document.addEventListener("DOMContentLoaded", () => {
   resetButton.addEventListener("click", () => {
     form.reset();
     resetResults();
+    currentStep = 0;
+    showStep(currentStep);
+    form.style.display = "flex";
+    introCard.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   modalCloseButton?.addEventListener("click", hideModal);
@@ -344,5 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.target === modal) hideModal();
   });
 
+  // Initialize
   resetResults();
+  showStep(0);
 });
