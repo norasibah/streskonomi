@@ -333,9 +333,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update progress
     const progress = ((stepIndex + 1) / totalSteps) * 100;
     progressFill.style.width = `${progress}%`;
-    progressLabel.textContent = `Bahagian ${
-      stepIndex + 1
-    } daripada ${totalSteps}`;
+    progressLabel.textContent = `Bahagian ${stepIndex + 1
+      } daripada ${totalSteps}`;
 
     // Update button visibility
     prevButton.style.display = stepIndex === 0 ? "none" : "block";
@@ -376,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentStep < totalSteps - 1) {
       currentStep++;
       showStep(currentStep);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      factorCardsEl[currentStep].scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
 
@@ -385,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentStep > 0) {
       currentStep--;
       showStep(currentStep);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      factorCardsEl[currentStep].scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
 
