@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.style.display = "none";
       introCard.style.display = "none";
       resultsSection.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       showModal(error.message);
     }
