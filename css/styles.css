@@ -528,17 +528,17 @@ button:disabled {
 /* Responsive */
 @media (max-width: 640px) {
     .page-shell {
-        padding: 1rem 0.75rem 3rem;
+        padding: 1rem 0.25rem 3rem;
     }
 
     .likert-group {
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0.25rem;
+        gap: 0.2rem;
     }
 
     .likert-group label {
         font-size: 0.75rem;
-        padding: 0.5rem 0.15rem;
+        padding: 0.5rem 0;
     }
 
     .form-actions {
@@ -552,7 +552,8 @@ button:disabled {
     .hero-card,
     .factor-card,
     #results {
-        padding: 1.25rem;
+        padding: 1rem;
+        border-radius: var(--radius-md);
     }
 
     .results-summary h3 {
