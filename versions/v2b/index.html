@@ -10,6 +10,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .submission-status {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      background: var(--accent-light, #f3e8ff);
+      border: 1px solid var(--accent-muted, #a855f7);
+    }
+
+    .submission-status.hidden {
+      display: none;
+    }
+
+    .submission-status.success {
+      background: #d1fae5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+
+    .submission-status.error {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+
+    .status-icon {
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .submission-status:not(.success):not(.error) .status-icon {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+  </style>
 </head>
 
 <body>
@@ -442,6 +483,11 @@
           <p id="overall-recommendation" style="margin: 0">
             Lengkapkan soal selidik untuk melihat cadangan.
           </p>
+        </div>
+
+        <div id="submission-status" class="submission-status hidden">
+          <span class="status-icon">⏳</span>
+          <span class="status-text">Menyimpan respons anda...</span>
         </div>
 
         <div class="form-actions" style="margin-top: 2rem; justify-content: center;">

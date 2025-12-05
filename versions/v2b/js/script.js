@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // ============ GOOGLE SHEETS CONFIG ============
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzTUvRC7xF6m7x4YpPplm52OSzsDjqY7d0LdZ2YjKUaeh9ng6VP8z4X4HSx_vP0Vzlo/exec";
+  // ==============================================
+
   const form = document.getElementById("streskonomi-form");
   const calculateButton = document.getElementById("calculate-button");
   const resetButton = document.getElementById("reset-button");
@@ -18,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("alert-modal");
   const modalMessage = document.getElementById("modal-message");
   const modalCloseButton = document.getElementById("modal-close");
+  const submissionStatus = document.getElementById("submission-status");
 
   // Factor card navigation
   const factorCardsEl = Array.from(
@@ -333,8 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update progress
     const progress = ((stepIndex + 1) / totalSteps) * 100;
     progressFill.style.width = `${progress}%`;
-    progressLabel.textContent = `Bahagian ${stepIndex + 1
-      } daripada ${totalSteps}`;
+    progressLabel.textContent = `Bahagian ${
+      stepIndex + 1
+    } daripada ${totalSteps}`;
 
     // Update button visibility
     prevButton.style.display = stepIndex === 0 ? "none" : "block";
@@ -375,7 +382,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentStep < totalSteps - 1) {
       currentStep++;
       showStep(currentStep);
-      factorCardsEl[currentStep].scrollIntoView({ behavior: "smooth", block: "start" });
+      factorCardsEl[currentStep].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   });
 
@@ -384,11 +394,72 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentStep > 0) {
       currentStep--;
       showStep(currentStep);
-      factorCardsEl[currentStep].scrollIntoView({ behavior: "smooth", block: "start" });
+      factorCardsEl[currentStep].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   });
 
-  calculateButton.addEventListener("click", () => {
+  // Function to submit data to Google Sheets
+  async function submitToGoogleSheets(responseData, overallMean, overallLevel) {
+    if (!GOOGLE_SCRIPT_URL) {
+      console.log("Google Script URL not configured. Skipping submission.");
+      return { status: "skipped" };
+    }
+
+    // Show loading status
+    if (submissionStatus) {
+      submissionStatus.classList.remove("hidden", "success", "error");
+      submissionStatus.querySelector(".status-icon").textContent = "⏳";
+      submissionStatus.querySelector(".status-text").textContent =
+        "Menyimpan respons anda...";
+    }
+
+    // Flatten responses into single object with question keys
+    const flatData = {};
+    Object.entries(responseData).forEach(([factor, scores]) => {
+      const factorMeta = FACTORS[factor];
+      factorMeta.questions.forEach((qName, idx) => {
+        flatData[qName] = scores[idx];
+      });
+    });
+
+    // Add overall results
+    flatData.overall_mean = overallMean.toFixed(2);
+    flatData.overall_level = overallLevel;
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(flatData),
+      });
+
+      // With no-cors, we can't read the response, but if no error thrown, assume success
+      if (submissionStatus) {
+        submissionStatus.classList.add("success");
+        submissionStatus.querySelector(".status-icon").textContent = "✓";
+        submissionStatus.querySelector(".status-text").textContent =
+          "Respons anda telah disimpan. Terima kasih!";
+      }
+      return { status: "success" };
+    } catch (error) {
+      console.error("Submission error:", error);
+      if (submissionStatus) {
+        submissionStatus.classList.add("error");
+        submissionStatus.querySelector(".status-icon").textContent = "✗";
+        submissionStatus.querySelector(".status-text").textContent =
+          "Gagal menyimpan respons. Keputusan anda masih dipaparkan.";
+      }
+      return { status: "error", error };
+    }
+  }
+
+  calculateButton.addEventListener("click", async () => {
     if (!validateCurrentStep()) {
       showModal(
         `Sila jawab semua soalan bagi bahagian ini sebelum meneruskan.`
@@ -422,6 +493,9 @@ document.addEventListener("DOMContentLoaded", () => {
       introCard.style.display = "none";
       resultsSection.classList.remove("hidden");
       resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      // Submit to Google Sheets (async, non-blocking)
+      submitToGoogleSheets(responses, overallMean, overallLevel);
     } catch (error) {
       showModal(error.message);
     }
@@ -434,6 +508,11 @@ document.addEventListener("DOMContentLoaded", () => {
     showStep(currentStep);
     form.style.display = "flex";
     introCard.style.display = "block";
+    // Hide submission status
+    if (submissionStatus) {
+      submissionStatus.classList.add("hidden");
+      submissionStatus.classList.remove("success", "error");
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
