@@ -5,8 +5,6 @@
 - [x] apply new questions by factors @ v2c
 - [x] find a way to save and export the data @ v2b
 
-## 7, Dec
-
 # v1
 
 - initial push
@@ -50,3 +48,10 @@
 # v3b
 
 - updated recommendations (cadangan) texts
+- minor text error
+
+# v3c
+
+- updated table for mobile
+- remove the able to see calculations
+- minor text replace
