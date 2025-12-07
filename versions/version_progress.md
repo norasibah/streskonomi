@@ -1,7 +1,13 @@
 # todo
 
-- [ ] apply new questions by factors
-- [x] find a way to save and export the data (@v2b)
+## 5, Dec
+
+- [x] apply new questions by factors @ v2c
+- [x] find a way to save and export the data @ v2b
+
+## 7, Dec
+
+
 
 # v1
 
@@ -19,8 +25,21 @@
 
 - connection with Google App Sheet
 - data will be saved into Google Sheet
-- added disclaimer 
+- added disclaimer
 
 # v2c
 
 - applying the new questions
+
+
+# v3
+
+- update questions
+- remove google sheet connection
+- redesign summary page
+  - remove tindakan by dimensions
+  - revamp summary -- has new recommendations, interpretation
+  - simple display of each dimensions
+- add introduction page
+- change scale calculate min (new)
+- skor min overall has weight (oversight)

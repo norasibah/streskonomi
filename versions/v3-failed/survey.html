@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pemantau Streskonomi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+
+    <!-- SURVEY PAGE -->
+    <section id="survey-page">
+      <header>
+        <div style="padding: 0 0.75rem;">
+          <h1>Pemantau Streskonomi</h1>
+        </div>
+      </header>
+
+      <main>
+        <form id="streskonomi-form">
+          <div class="factor-grid">
+            <article class="factor-card" data-factor="kewangan">
+              <div>
+                <h2>A. Kewangan</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya rasa tertekan untuk membayar bil bulanan tepat pada masanya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="kewangan-q1" value="1" required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="kewangan-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="kewangan-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="kewangan-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="kewangan-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya rasa risau jika pendapatan bulanan tidak mencukupi untuk keperluan asas.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="kewangan-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="kewangan-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="kewangan-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="kewangan-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="kewangan-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya rasa bimbang tentang insiden kenaikan harga barang.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="kewangan-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="kewangan-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="kewangan-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="kewangan-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="kewangan-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya rasa tertekan dengan perbelanjaan harian yang semakin meningkat.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="kewangan-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="kewangan-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="kewangan-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="kewangan-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="kewangan-q4" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Pengurusan bajet saya sering negatif.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="kewangan-q5" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="kewangan-q5" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="kewangan-q5" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="kewangan-q5" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="kewangan-q5" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+
+            <article class="factor-card hidden" data-factor="pendapatan">
+              <div>
+                <h2>B. Pendapatan &amp; Pekerjaan</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya bimbang kehilangan pekerjaan atau pendapatan.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="pendapatan-q1" value="1" required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="pendapatan-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="pendapatan-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="pendapatan-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="pendapatan-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Pendapatan saya tidak setimpal dengan kos sara hidup yang lebih tinggi.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="pendapatan-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="pendapatan-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="pendapatan-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="pendapatan-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="pendapatan-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Keadaan ekonomi yang tidak menentu membuat saya risau.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="pendapatan-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="pendapatan-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="pendapatan-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="pendapatan-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="pendapatan-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya tertekan apabila memikirkan masa depan kerjaya saya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="pendapatan-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="pendapatan-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="pendapatan-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="pendapatan-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="pendapatan-q4" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya merasa risau tentang kewangan diwaktu kecemasan yang tidak dijangka.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="pendapatan-q5" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="pendapatan-q5" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="pendapatan-q5" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="pendapatan-q5" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="pendapatan-q5" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+
+            <article class="factor-card hidden" data-factor="simpanan">
+              <div>
+                <h2>C. Simpanan &amp; Kesediaan Masa Depan</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya merasa bimbang kerana tidak mempunyai simpanan yang mencukupi.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="simpanan-q1" value="1" required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="simpanan-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="simpanan-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="simpanan-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="simpanan-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya takut tidak mampu menampung kos pendidikan anak pada masa-masa akan datang.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="simpanan-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="simpanan-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="simpanan-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="simpanan-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="simpanan-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya risau tentang keupayaan kewangan semasa menghadapi persaraan.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="simpanan-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="simpanan-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="simpanan-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="simpanan-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="simpanan-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya tidak yakin dengan kestabilan kewangan keluarga pada masa depan.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="simpanan-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="simpanan-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="simpanan-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="simpanan-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="simpanan-q4" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+
+            <article class="factor-card hidden" data-factor="hutang">
+              <div>
+                <h2>D. Hutang &amp; Komitmen Kewangan</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya tertekan dengan jumlah hutang yang perlu dibayar.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="hutang-q1" value="1" required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="hutang-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="hutang-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="hutang-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="hutang-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya sukar mengimbangi bayaran hutang dengan perbelanjaan kehidupan sehari-hari.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="hutang-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="hutang-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="hutang-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="hutang-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="hutang-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya risau jika gagal membayar pinjaman tepat pada waktunya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="hutang-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="hutang-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="hutang-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="hutang-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="hutang-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Hutang memberi kesan negatif kepada kesejahteraan mental saya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="hutang-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="hutang-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="hutang-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="hutang-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="hutang-q4" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+
+            <article class="factor-card hidden" data-factor="tekanan_sosial">
+              <div>
+                <h2>E. Tekanan Ekonomi Sosial</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya berasa malu kerana tidak mencapai tahap standard hidup masyarakat lain.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="tekanan_sosial-q1" value="1"
+                        required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="tekanan_sosial-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="tekanan_sosial-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="tekanan_sosial-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="tekanan_sosial-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya tertekan apabila perlu membantu kewangan keluarga.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="tekanan_sosial-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="tekanan_sosial-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="tekanan_sosial-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="tekanan_sosial-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="tekanan_sosial-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya tertekan apabila melihat orang lain mengalami status kewangan yang lebih stabil.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="tekanan_sosial-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="tekanan_sosial-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="tekanan_sosial-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="tekanan_sosial-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="tekanan_sosial-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya berasa rendah diri kerana kedudukan kewangan saya tidak mencapai standard seperti orang
+                    lain.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="tekanan_sosial-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="tekanan_sosial-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="tekanan_sosial-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="tekanan_sosial-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="tekanan_sosial-q4" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+
+            <article class="factor-card hidden" data-factor="reaksi_emosi">
+              <div>
+                <h2>F. Reaksi Emosi &amp; Psikologi</h2>
+              </div>
+              <ol class="question-list">
+                <li class="question">
+                  <span>Saya mudah marah kerana masalah kewangan.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="reaksi_emosi-q1" value="1"
+                        required /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="reaksi_emosi-q1" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="reaksi_emosi-q1" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="reaksi_emosi-q1" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="reaksi_emosi-q1" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Masalah kewangan mengganggu tidur saya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="reaksi_emosi-q2" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="reaksi_emosi-q2" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="reaksi_emosi-q2" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="reaksi_emosi-q2" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="reaksi_emosi-q2" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya cepat cemas ketika memikirkan masa depan ekonomi.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="reaksi_emosi-q3" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="reaksi_emosi-q3" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="reaksi_emosi-q3" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="reaksi_emosi-q3" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="reaksi_emosi-q3" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya rasa hilang kawalan terhadap kewangan.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="reaksi_emosi-q4" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="reaksi_emosi-q4" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="reaksi_emosi-q4" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="reaksi_emosi-q4" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="reaksi_emosi-q4" value="5" /></label>
+                  </div>
+                </li>
+                <li class="question">
+                  <span>Saya berasa putus asa tentang situasi ekonomi saya.</span>
+                  <div class="likert-group">
+                    <label>1. Sangat Tidak Setuju<input type="radio" name="reaksi_emosi-q5" value="1" /></label>
+                    <label>2. Tidak Setuju<input type="radio" name="reaksi_emosi-q5" value="2" /></label>
+                    <label>3. Neutral<input type="radio" name="reaksi_emosi-q5" value="3" /></label>
+                    <label>4. Setuju<input type="radio" name="reaksi_emosi-q5" value="4" /></label>
+                    <label>5. Sangat Setuju<input type="radio" name="reaksi_emosi-q5" value="5" /></label>
+                  </div>
+                </li>
+              </ol>
+            </article>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary" id="prev-button" style="display: none;">
+              ← Sebelumnya
+            </button>
+            <button type="button" class="primary" id="next-button">
+              Seterusnya →
+            </button>
+            <button type="button" class="primary" id="calculate-button" style="display: none;">
+              Lihat Keputusan
+            </button>
+          </div>
+
+          <div class="progress-container">
+            <div class="progress-label" id="progress-label">Bahagian 1 daripada 6</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill" style="width: 16.67%;"></div>
+            </div>
+          </div>
+        </form>
+
+        <section id="results" class="hidden">
+          <h2 style="text-align: center; margin-bottom: 2rem; color: var(--accent); font-size: 2rem;">Keputusan Analisis
+          </h2>
+
+          <div class="results-grid">
+            <article class="result-card" data-result="kewangan">
+              <h4>Kewangan</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+            <article class="result-card" data-result="pendapatan">
+              <h4>Pendapatan &amp; Pekerjaan</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+            <article class="result-card" data-result="simpanan">
+              <h4>Simpanan &amp; Masa Depan</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+            <article class="result-card" data-result="hutang">
+              <h4>Hutang &amp; Komitmen</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+            <article class="result-card" data-result="tekanan_sosial">
+              <h4>Tekanan Ekonomi Sosial</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+            <article class="result-card" data-result="reaksi_emosi">
+              <h4>Reaksi Emosi</h4>
+              <p>Skor Min: <span class="factor-mean">--</span></p>
+              <p>Tahap: <span class="factor-level">--</span></p>
+              <ul class="factor-recos"></ul>
+            </article>
+          </div>
+
+          <div class="results-summary"
+            style="border-bottom: none; border-top: 1px solid var(--border-soft); margin-bottom: 2rem; padding-top: 2rem; padding-bottom: 0;">
+            <h3>Gambaran Keseluruhan</h3>
+            <div class="score-badge" id="overall-score">--</div>
+            <p id="overall-level">Skor belum dikira.</p>
+          </div>
+
+          <div class="overall-recommendation">
+            <h4>Cadangan Menyeluruh</h4>
+            <p id="overall-recommendation" style="margin: 0">
+              Lengkapkan soal selidik untuk melihat cadangan.
+            </p>
+          </div>
+
+          <div class="form-actions" style="margin-top: 2rem; justify-content: center;">
+            <button type="button" class="secondary" id="reset-button">
+              Mula Semula
+            </button>
+          </div>
+
+          <p class="note" style="margin-top: 1.5rem;">
+            Nota: Skor min keseluruhan diperoleh daripada purata keenam-enam faktor.
+          </p>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <div class="modal hidden" id="alert-modal" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <h3>Lengkapkan Soalan</h3>
+      <p id="modal-message">
+        Terdapat soalan yang belum dijawab. Sila semak semula semua faktor.
+      </p>
+      <button type="button" class="primary" id="modal-close">Faham</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
