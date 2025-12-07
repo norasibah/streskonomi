@@ -46,3 +46,7 @@
 - seperate summary to two page
 - slight text grammar error fix
 - design change on the summary page
+
+# v3b
+
+- updated recommendations (cadangan) texts
