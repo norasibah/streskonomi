@@ -371,10 +371,10 @@
         </div>
       </form>
 
-      <section id="results" class="hidden">
+      <!-- Summary Page 1: Keputusan Streskonomi Mengikut Dimensi -->
+      <section id="summary-page-1" class="hidden">
         <div class="results-header">
           <h2>Keputusan Streskonomi Mengikut Dimensi</h2>
-
         </div>
 
         <div class="results-card">
@@ -423,14 +423,29 @@
           </div>
         </div>
 
+        <div class="action-container" style="display: flex; justify-content: center; margin-top: 2rem;">
+          <button type="button" class="primary-button" id="next-to-summary-button">
+            Seterusnya →
+          </button>
+        </div>
+      </section>
+
+      <!-- Summary Page 2: Skor Min Keseluruhan -->
+      <section id="summary-page-2" class="hidden">
+        <div class="results-header">
+          <h2>Keputusan Streskonomi</h2>
+        </div>
+
         <div class="overall-score-card">
-          <!-- <h3>Skor Keseluruhan</h3> -->
-          <div class="score-label">Skor Min Keseluruhan
+          <div class="score-section">
+            <h3 class="score-label">Skor Min Keseluruhan</h3>
             <div class="score-value" id="overall-score">--</div>
-            <br>
-            <h3 class="score-label">Tahap Streskonomi
-              <div class="score-value" id="overall-level">--</div>
-            </h3>
+          </div>
+
+          <div class="score-level-container">
+            <h3 class="score-label">Tahap Streskonomi</h3>
+            <div class="score-value" id="overall-level" style="font-size: clamp(2rem, 5vw, 3rem); margin-top: 0.5rem;">
+              --</div>
           </div>
 
           <button type="button" id="toggle-calc-btn" class="toggle-calc-btn hidden">
@@ -448,14 +463,50 @@
           </div>
         </div>
 
+        <!-- Interpretation Card -->
+        <div class="interpretation-card" id="interpretation-section">
+          <h4>
+            <span class="icon">
+              <!-- Icon will be injected or static placeholder can be here -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </span>
+            Interpretasi
+          </h4>
+          <p>Lengkapkan soal selidik untuk melihat interpretasi.</p>
+        </div>
+
+        <!-- Recommendation Card -->
         <div class="recommendation-card" id="overall-recommendation">
-          <h4>Cadangan</h4>
+          <h4>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
+                </path>
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+              </svg>
+            </span>
+            Cadangan Tindakan
+          </h4>
           <p>Lengkapkan soal selidik untuk melihat cadangan yang diperibadikan.</p>
         </div>
 
         <div class="action-container">
+          <button type="button" class="secondary-button" id="back-to-dimensions-button">
+            ← Keputusan Dimensi
+          </button>
           <button type="button" class="secondary-button" id="reset-button">
             Mula Semula
+          </button>
+          <button type="button" class="primary-button" id="finish-button">
+            Selesai
           </button>
         </div>
 
@@ -473,6 +524,17 @@
         Terdapat soalan yang belum dijawab. Sila semak semula semua faktor.
       </p>
       <button type="button" class="primary" id="modal-close">Faham</button>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="thank-you-modal" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <h3>Terima Kasih!</h3>
+      <p>
+        Terima kasih atas masa dan kesungguhan anda dalam melengkapkan soal selidik ini. Semoga maklumat yang diberikan
+        dapat membantu anda menguruskan Streskonomi dengan lebih baik.
+      </p>
+      <button type="button" class="primary" id="thank-you-close">Kembali ke Halaman Utama</button>
     </div>
   </div>
 

@@ -7,9 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressFill = document.getElementById("progress-fill");
   const progressLabel = document.getElementById("progress-label");
 
-  const resultsSection = document.getElementById("results");
+  const summaryPage1 = document.getElementById("summary-page-1");
+  const summaryPage2 = document.getElementById("summary-page-2");
+  const nextToSummaryButton = document.getElementById("next-to-summary-button");
+  const backToDimensionsButton = document.getElementById(
+    "back-to-dimensions-button"
+  );
+
   const overallScoreEl = document.getElementById("overall-score");
   const overallLevelEl = document.getElementById("overall-level");
+  const interpretationSection = document.getElementById(
+    "interpretation-section"
+  );
   const overallRecommendationEl = document.getElementById(
     "overall-recommendation"
   );
@@ -17,6 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("alert-modal");
   const modalMessage = document.getElementById("modal-message");
   const modalCloseButton = document.getElementById("modal-close");
+
+  const thankYouModal = document.getElementById("thank-you-modal");
+  const thankYouCloseButton = document.getElementById("thank-you-close");
+  const finishButton = document.getElementById("finish-button");
 
   // Factor card navigation
   const factorCardsEl = Array.from(
@@ -240,8 +253,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const OVERALL_RECOMMENDATIONS = {
     "Sangat Rendah": {
       icon: "🟩",
-      title: "TAHAP 1: Stres Ekonomi Sangat Rendah (1.00 – 1.49)",
-      interpretation: "Streskonomi anda secara keseluruhan adalah stabil.",
+      title: "TAHAP 1: Streskonomi Sangat Rendah (1.00 – 1.49)",
+      interpretation:
+        "Streskonomi Sangat Rendah adalah stabil secara keseluruhan.",
       actions: [
         "Kekalkan amalan kewangan sihat.",
         "Teruskan tabiat menyimpan yang konsisten.",
@@ -250,9 +264,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     Rendah: {
       icon: "🟦",
-      title: "TAHAP 2: Stres Ekonomi Rendah (1.50 – 2.49)",
+      title: "TAHAP 2: Streskonomi Rendah (1.50 – 2.49)",
       interpretation:
-        "Streskonomi anda mengalami tekanan kecil tetapi masih terkawal.",
+        "Streskonomi Rendah mengalami tekanan kecil tetapi masih terkawal.",
       actions: [
         "Sentiasa melakukan semakan bajet dan kenal pasti ruang bagi penjimatan.",
         "Bangunkan simpanan kecemasan sekurangnya bagi tempoh 1–2 bulan.",
@@ -262,9 +276,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     Sederhana: {
       icon: "🟨",
-      title: "TAHAP 3: Stres Ekonomi Sederhana (2.50 – 3.49)",
+      title: "TAHAP 3: Streskonomi Sederhana (2.50 – 3.49)",
       interpretation:
-        "Streskonomi anda berpotensi memberi kesan pada emosi, keyakinan kewangan dan perancangan masa depan.",
+        "Streskonomi Sederhana berpotensi memberi kesan pada emosi, keyakinan kewangan dan perancangan masa depan.",
       actions: [
         "Utamakan keperluan.",
         "Pantau aliran tunai melalui aplikasi atau perekodan secara manual.",
@@ -276,9 +290,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     Tinggi: {
       icon: "🟥",
-      title: "TAHAP 4: Stres Ekonomi Tinggi (3.50 – 4.49)",
+      title: "TAHAP 4: Streskonomi Tinggi (3.50 – 4.49)",
       interpretation:
-        "Streskonomi anda memberi kesan negatif pada kesihatan mental, hubungan sosial dan prestasi kerja.",
+        "Streskonomi Tinggi memberi kesan negatif pada kesihatan mental, hubungan sosial dan prestasi kerja.",
       actions: [
         "Sediakan pelan kewangan formal, yang bantu laksana bajet secara terancang.",
         "Cari sumber pendapatan tambahan untuk menampung kurangan.",
@@ -290,9 +304,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     "Sangat Tinggi": {
       icon: "🔴",
-      title: "TAHAP 5: Stres Ekonomi Sangat Tinggi (4.50 - 5.00)",
+      title: "TAHAP 5: Streskonomi Sangat Tinggi (4.50 - 5.00)",
       interpretation:
-        "Streskonomi anda di tahap kritikal; berisiko tinggi menghadapi masalah kebimbangan (Anxiety) dan depresi (Depression) jika tidak dirawat.",
+        "Streskonomi Sangat Tinggi di tahap kritikal; berisiko tinggi menghadapi masalah kebimbangan (Anxiety) dan depresi (Depression) jika tidak dirawat.",
       actions: [
         "Laksanakan 'financial reset' yang merangkumi aktiviti:",
         "Fokus keperluan asas sahaja,",
@@ -327,7 +341,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculationBreakdown = document.getElementById("calculation-breakdown");
 
   function resetResults() {
-    resultsSection.classList.add("hidden");
+    summaryPage1.classList.add("hidden");
+    summaryPage2.classList.add("hidden");
     overallScoreEl.textContent = "--";
     overallLevelEl.textContent = "Skor belum dikira.";
     overallRecommendationEl.innerHTML = `
@@ -523,9 +538,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span>Jumlah Pemberat</span>
                 <span>= ${weightedSum.toFixed(3)}</span>
             </div>
-            <div class="calc-row" style="color: var(--accent-light);">
-                <span>= ${overallMean.toFixed(2)}</span>
-            </div>
         </div>
       `;
 
@@ -541,7 +553,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Display new detailed recommendation
       if (recommendation) {
-        // Parse title components to separate "TAHAP X", "Main Title", and "(Range)"
+        // Parse title components to separate "TAHAP X" and "Main Title" (without range)
         let titleHtml = recommendation.title;
         const titleParts = recommendation.title.split(":");
 
@@ -552,55 +564,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (lastParenIndex !== -1) {
             const mainTitle = rest.substring(0, lastParenIndex).trim();
-            const range = rest.substring(lastParenIndex).trim();
 
             titleHtml = `
                     <span class="tahap-label">${prefix}</span>
                     <span class="main-title">${mainTitle}</span>
-                    <span class="score-range">${range}</span>
                 `;
           }
         }
 
-        overallRecommendationEl.innerHTML = `
-          <div class="recommendation-header">
-            <div class="recommendation-icon">${recommendation.icon}</div>
-            <div class="recommendation-title-group">
-              <h3>${titleHtml}</h3>
-            </div>
-          </div>
+        // Update interpretation section
+        interpretationSection.innerHTML = `
+          <h4>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </span> 
+            Interpretasi
+          </h4>
+          <p>${recommendation.interpretation}</p>
+        `;
 
-          <div class="interpretation-box">
-            <p>${recommendation.interpretation}</p>
-          </div>
-          
-          <div class="action-list-container">
-            <h4>
-                <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
-                        <path d="M9 18h6"></path>
-                        <path d="M10 22h4"></path>
-                    </svg>
-                </span> 
-                Cadangan Tindakan
-            </h4>
-            <ul class="action-list">
-              ${recommendation.actions
-                .map((action) => `<li>${action}</li>`)
-                .join("")}
-            </ul>
-          </div>
+        // Update recommendation section
+        overallRecommendationEl.innerHTML = `
+          <h4>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+              </svg>
+            </span> 
+            Cadangan Tindakan
+          </h4>
+          <ul class="action-list">
+            ${recommendation.actions
+              .map((action) => `<li>${action}</li>`)
+              .join("")}
+          </ul>
         `;
       }
 
       // Hide form and show results
       form.style.display = "none";
-      resultsSection.classList.remove("hidden");
-      resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      summaryPage1.classList.remove("hidden");
+      summaryPage2.classList.add("hidden");
+      summaryPage1.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       showModal(error.message);
     }
+  });
+
+  // Navigation between summary pages
+  nextToSummaryButton.addEventListener("click", () => {
+    summaryPage1.classList.add("hidden");
+    summaryPage2.classList.remove("hidden");
+    summaryPage2.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  backToDimensionsButton.addEventListener("click", () => {
+    summaryPage2.classList.add("hidden");
+    summaryPage1.classList.remove("hidden");
+    summaryPage1.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   resetButton.addEventListener("click", () => {
@@ -615,6 +642,22 @@ document.addEventListener("DOMContentLoaded", () => {
   modalCloseButton?.addEventListener("click", hideModal);
   modal?.addEventListener("click", (event) => {
     if (event.target === modal) hideModal();
+  });
+
+  // Finish button - show thank you modal
+  finishButton.addEventListener("click", () => {
+    thankYouModal.classList.remove("hidden");
+  });
+
+  // Thank you modal close - redirect to index.html
+  thankYouCloseButton?.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  thankYouModal?.addEventListener("click", (event) => {
+    if (event.target === thankYouModal) {
+      window.location.href = "index.html";
+    }
   });
 
   // Initialize

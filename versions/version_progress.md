@@ -7,8 +7,6 @@
 
 ## 7, Dec
 
-
-
 # v1
 
 - initial push
@@ -31,7 +29,6 @@
 
 - applying the new questions
 
-
 # v3
 
 - update questions
@@ -43,3 +40,9 @@
 - add introduction page
 - change scale calculate min (new)
 - skor min overall has weight (oversight)
+
+# v3a
+
+- seperate summary to two page
+- slight text grammar error fix
+- design change on the summary page
