@@ -55,3 +55,8 @@
 - updated table for mobile
 - remove the able to see calculations
 - minor text replace
+
+# v3d
+
+- update table view for mobile (tekan sini)
+- update recommendations
